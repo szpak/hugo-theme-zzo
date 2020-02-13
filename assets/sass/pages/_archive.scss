@@ -170,7 +170,6 @@
   &__title {
     margin-right: 0.5rem;    
     margin-left: 1rem;
-    width: 100%;
     font-family: $title-font;
 
     &[data-title-wrap^="no"] {
@@ -232,6 +231,19 @@
           }
         }
       }
+    }
+  }
+
+  &__subtitle {
+    text-align: center;
+    font-weight: bold;
+    font-family: $title-font;
+
+    @include themify($themes) {
+      color: themed('terms-title-color');
+    }
+    @media only screen and (max-width:600px) {
+      margin-bottom: 1rem;
     }
   }
 }

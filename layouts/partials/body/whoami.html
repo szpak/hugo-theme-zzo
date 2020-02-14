@@ -36,7 +36,7 @@
       {{ if $.Param "authorDesc" }}
         {{ $.Param "AuthorDesc" }}
       {{ else }}
-        {{ $.Param "whoami" }}
+        {{ $.Param "whoami" | markdownify  }}
       {{ end }}
     </div>
     <div class="whoami__social">

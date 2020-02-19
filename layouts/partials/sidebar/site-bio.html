@@ -29,7 +29,8 @@
   <div class="bio__desc">
     {{ $.Param "whoami" | markdownify }}
   </div>
-  
+  {{ partial "sidebar/custom-bio-desc-longer.html" }}
+
   {{ if $.Param "organization" }}
   <div class="bio__info">
     <div class="bio__info--icon">

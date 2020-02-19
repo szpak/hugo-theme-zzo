@@ -17,5 +17,7 @@
     {{ partial "comments/utterances.html" . }}
   {{ else if $.Param "isso.enable" }}
     {{ partial "comments/isso.html" . }}
+  {{ else if $.Param "viamail.enable" }}
+    {{ partial "comments/viamail.html" . }}
   {{ end }}
 {{ end }}

@@ -13,7 +13,7 @@
 
         {{ range $filteredSections }}
         <section class="sidebar-recent">
-            <a href="{{ .RelPermalink }}" class="sidebar-recent__title p2">{{ .Title }}</a>
+            <a href="{{ .RelPermalink }}" class="sidebar-recent__title p2">Recent {{ .Title }}</a>
             <ul class="sidebar-recent__ul">
                 {{ range first ($.Param "itemsPerCategory") .Pages }}
                     <li>

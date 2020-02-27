@@ -19,5 +19,7 @@
     {{ partial "comments/isso.html" . }}
   {{ else if $.Param "viamail.enable" }}
     {{ partial "comments/viamail.html" . }}
+  {{ else if $.Param "telegram.enable" }}
+    {{ partial "comments/telegram.html" . }}
   {{ end }}
 {{ end }}

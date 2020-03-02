@@ -1,4 +1,10 @@
-{{ define "title" }}{{ .Site.Title }}{{ end }}
+{{ define "title" }}
+  {{ if .Page.Title }}
+    {{ .Page.Title }}
+  {{ else }}
+    {{ .Site.Title }}
+  {{ end }}
+{{ end }}
 
 {{ define "main" }}
 <main class="main inner" data-sidebar-position="{{ $.Param "sidebarPosition" }}">

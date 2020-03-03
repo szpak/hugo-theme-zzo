@@ -1,16 +1,24 @@
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
+    {{ if .IsHome -}}
+    {{ if .Site.Params.showLogo -}}
+    "thumbnailUrl": {{ printf "%s%s" .Site.BaseURL "/logo.png" }},
+    {{- end }}
+    {{ end }}
+
     {{ if .IsPage -}}
     "@type": {{ if or (eq .Section "blog") (eq .Section "posts") }}"BlogPosting"{{ else }}"WebPage"{{ end }},
     "headline": {{ .Title }},
-    "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" }},
-    "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }},
+    "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }},
+    "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | safeHTML }},
     "url" : {{ .Permalink }},
     "description": {{ with (.Description | default (replaceRE "\n" " " (.Summary | truncate 170))) }}{{ . }}{{ end }},
     {{ with .Params.tags -}}
     "keywords": {{ . }},
     {{ end -}}
+    "wordcount": {{ .WordCount }},
+
     {{ else -}}
     "@type": "WebPage",
     "url" : {{ .Permalink }},
@@ -19,10 +27,15 @@
     "description": {{ . }},
     {{ end -}}
     {{ end -}}
+
     {{ with $.Param "image" -}}
     "image" : {{ . | absURL }},
     {{ end -}}
-    {{ with $.Param "author" -}}
+    {{ $pageAuthor := .Site.Params.myname }}
+    {{ if isset .Params "author" }}
+      {{ $pageAuthor = $.Param "author" }}
+    {{ end }}
+    {{ with $pageAuthor -}}
     "author": {
       "@type": "Person",
       "name": {{ . }}
@@ -35,10 +48,10 @@
     "publisher": {
       "@type": "Organization",
       "name": {{ .Site.Title  }},
-      {{ with $.Param "icon" -}}
+      {{ if .Site.Params.showLogo | default "false" -}}
       "logo" : {
         "@type": "ImageObject",
-        "url": {{ . | absURL }}
+        "url": {{ printf "%s%s" .Site.BaseURL "/logo.png" }}
       },
       {{ end -}}
       "url": {{ .Site.BaseURL }}

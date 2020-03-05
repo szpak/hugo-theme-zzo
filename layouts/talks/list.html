@@ -1,6 +1,11 @@
 {{ define "main" }}
 {{ $titleWrap := .Params.titleWrap }}
 
+{{ if $.Param "enableSidebarSingle" }}
+<main class="main inner" data-sidebar-position="{{ $.Param "sidebarPosition" }}">
+<div class="list__main {{ if $.Param "enableSidebar" }}{{ if eq ($.Param "sidebarPosition") "left" }}mr{{ else }}lm{{ end }}{{ else }}lmr{{ end }}">
+{{ end }}
+
 <header class="header basicflex-column">
   <h3 class="h3 terms__title">
     {{ .Title }}
@@ -53,4 +58,14 @@
   </div>
   {{ partial "script/archive-script" . }}
 </main>
+
+{{ if $.Param "enableSidebarSingle" }}
+</div>
+<aside class="list__sidebar {{ if eq ($.Param "sidebarPosition") "left" }}l{{ else }}r{{ end }}" data-dir="{{ $.Param "languagedir" | default "ltr" }}">
+    {{ partial "sidebar/sidebar-home" . }}
+</aside>
+</main>
+{{ partial "script/sidebar-script" . }}
+{{ end }}
+
 {{ end }}

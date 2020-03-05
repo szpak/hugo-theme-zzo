@@ -1,6 +1,8 @@
 {{ if $.Param "enableSidebar" }}
 <div class="sidebar">
+    {{ if .IsHome }}
     {{ partial "search/site-search" . }}
+    {{ end }}
     {{ partial "sidebar/site-bio" . }}
     {{ partial "sidebar/custom-home" . }}
     {{ partial "sidebar/list/posts-by-order" . }}

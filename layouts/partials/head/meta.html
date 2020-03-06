@@ -51,6 +51,11 @@
     <meta property="twitter:description" content="{{ $.Param "description" }}">
   {{ end }}
 {{ end }}
+{{ if $.Site.Params.indieLoginOptions.useGithub }}
+  {{ with $.Site.Params.socialOptions.github }}
+<link href="{{ . }}" rel="me">
+  {{ end }}
+{{ end}}
 {{ hugo.Generator }}
 <meta name="msapplication-TileColor" content="{{ $.Scratch.Get "themeTitleColor" | default "#fff" }}">
 <!-- Chrome, Firefox OS and Opera -->

@@ -56,6 +56,12 @@
 <link href="{{ . }}" rel="me">
   {{ end }}
 {{ end}}
+{{ if $.Site.Params.webmentionIo }}
+  {{ $parsedBaseUrl := urls.Parse .Site.BaseURL }}
+  {{ with $parsedBaseUrl.Host }}
+<link rel="webmention" href="https://webmention.io/{{ . }}/webmention" />
+  {{ end }}
+{{ end }}
 {{ hugo.Generator }}
 <meta name="msapplication-TileColor" content="{{ $.Scratch.Get "themeTitleColor" | default "#fff" }}">
 <!-- Chrome, Firefox OS and Opera -->

@@ -51,17 +51,19 @@
     <meta property="twitter:description" content="{{ $.Param "description" }}">
   {{ end }}
 {{ end }}
-{{ if $.Site.Params.indieLoginOptions.useGithub }}
+
+{{- if $.Site.Params.indieLoginOptions.useGithub -}}
   {{ with $.Site.Params.socialOptions.github }}
 <link href="{{ . }}" rel="me">
-  {{ end }}
-{{ end}}
-{{ if $.Site.Params.webmentionIo }}
-  {{ $parsedBaseUrl := urls.Parse .Site.BaseURL }}
+  {{- end -}}
+{{- end -}}
+{{- if $.Site.Params.webmentionIo -}}
+  {{- $parsedBaseUrl := urls.Parse .Site.BaseURL -}}
   {{ with $parsedBaseUrl.Host }}
 <link rel="webmention" href="https://webmention.io/{{ . }}/webmention" />
-  {{ end }}
+  {{- end -}}
 {{ end }}
+
 {{ hugo.Generator }}
 <meta name="msapplication-TileColor" content="{{ $.Scratch.Get "themeTitleColor" | default "#fff" }}">
 <!-- Chrome, Firefox OS and Opera -->

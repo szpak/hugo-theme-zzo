@@ -37,8 +37,8 @@
         {{ $.Param "AuthorDesc" }}
       {{ else }}
         {{ $.Param "whoami" | markdownify  }}
+        {{ partial "sidebar/custom-bio-desc-longer.html" }}
       {{ end }}
-      {{ partial "sidebar/custom-bio-desc-longer.html" }}
     </div>
     <div class="whoami__social">
       {{ range $name, $path := $.Param "socialOptions" }}

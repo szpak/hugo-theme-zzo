@@ -1,6 +1,6 @@
 {{ define "title" }}
-  {{ if .Page.Title }}
-    {{ .Page.Title }}
+  {{ if .Params.IndexTitle }}
+    {{ .Params.IndexTitle }}
   {{ else }}
     {{ .Site.Title }}
   {{ end }}

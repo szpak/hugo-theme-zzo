@@ -3,9 +3,12 @@
 {{ if $.Param "enableSidebarSingle" }}
 <main class="main inner" data-sidebar-position="{{ $.Param "sidebarPosition" }}">
 <div class="list__main {{ if $.Param "enableSidebar" }}{{ if eq ($.Param "sidebarPosition") "left" }}mr{{ else }}lm{{ end }}{{ else }}lmr{{ end }}">
+
+<div class="main showcase inner" data-sidebar-position="{{ $.Param "sidebarPosition" }}">
+{{ else }}
+<main class="main showcase inner" data-sidebar-position="{{ $.Param "sidebarPosition" }}">
 {{ end }}
 
-<main class="main showcase inner" data-sidebar-position="{{ $.Param "sidebarPosition" }}">
   {{ if .Params.enableBio }}
     <aside class="{{ if eq ($.Param "sidebarPosition") "left" }}l{{ else }}r{{ end }}">
       <div class="showcase__bio">
@@ -34,9 +37,12 @@
       {{ partial "search/site-search" . }}
     </div>
   {{ end }}
-</main>
 
-{{ if $.Param "enableSidebarSingle" }}
+{{ if not ($.Param "enableSidebarSingle") }}
+</main>
+{{ else }}
+</div>
+
 </div>
 <aside class="list__sidebar {{ if eq ($.Param "sidebarPosition") "left" }}l{{ else }}r{{ end }}" data-dir="{{ $.Param "languagedir" | default "ltr" }}">
     {{ partial "sidebar/sidebar-home" . }}

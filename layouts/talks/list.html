@@ -14,7 +14,13 @@
     {{ .Content }}
   </div>
 </header>
+
+{{ if $.Param "enableSidebarSingle" }}
+<div class="main archive">
+{{ else }}
 <main class="main archive">
+{{ end }}
+
   {{ with .Params.subtitle }}
     <h6 class="archive__subtitle h6">
       {{ . }}
@@ -57,7 +63,12 @@
     {{ partial "search/site-search" . }}
   </div>
   {{ partial "script/archive-script" . }}
+
+{{ if not ($.Param "enableSidebarSingle") }}
 </main>
+{{ else }}
+</div>
+{{ end }}
 
 {{ if $.Param "enableSidebarSingle" }}
 </div>

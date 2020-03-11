@@ -10,11 +10,21 @@
     {{ .Title }}
   </h3>
 </header>
+
+{{ if $.Param "enableSidebarSingle" }}
+<div class="main about">
+  <article class="single__contents single__contents--about" data-dir="{{ if ne ($.Param "languagedir") "rtl" }}ltr{{ else }}rtl{{ end }}" data-ani="{{ $.Site.Params.enableUiAnimation | default "true" }}">
+    {{ .Content }}
+  </article>
+</div>
+{{ else }}
 <main class="main about">
   <article class="single__contents single__contents--about" data-dir="{{ if ne ($.Param "languagedir") "rtl" }}ltr{{ else }}rtl{{ end }}" data-ani="{{ $.Site.Params.enableUiAnimation | default "true" }}">
     {{ .Content }}
   </article>
 </main>
+{{ end }}
+
 <div class="hide">
   {{ partial "search/site-search" . }}
 </div>

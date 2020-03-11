@@ -3,9 +3,12 @@
 {{ if $.Param "enableSidebarSingle" }}
 <main class="main inner inner-for-embedding" data-sidebar-position="{{ $.Param "sidebarPosition" }}">
 <div class="list__main wrapper wrapper-embedded {{ if $.Param "enableSidebar" }}{{ if eq ($.Param "sidebarPosition") "left" }}mr{{ else }}lm{{ end }}{{ else }}lmr{{ end }}">
+
+<div class="single__main {{ if $.Param "enableSidebarSingle" }}main-embedded {{ end }}{{ if or ($.Param "enableToc") ($.Param "toc") }}{{ if $.Param "hideToc" }}main{{ else if eq ($.Param "tocPosition") "outer" }}main{{ else }}main-main{{ end }}{{ else }}main{{ end }}">
+{{ else }}
+<main class="single__main {{ if $.Param "enableSidebarSingle" }}main-embedded {{ end }}{{ if or ($.Param "enableToc") ($.Param "toc") }}{{ if $.Param "hideToc" }}main{{ else if eq ($.Param "tocPosition") "outer" }}main{{ else }}main-main{{ end }}{{ else }}main{{ end }}">
 {{ end }}
 
-<main class="single__main {{ if $.Param "enableSidebarSingle" }}main-embedded {{ end }}{{ if or ($.Param "enableToc") ($.Param "toc") }}{{ if $.Param "hideToc" }}main{{ else if eq ($.Param "tocPosition") "outer" }}main{{ else }}main-main{{ end }}{{ else }}main{{ end }}">
   {{ if $.Param "enableBreadcrumb" }}
     {{ partial "body/breadcrumb" . }}
   {{ end }}
@@ -42,15 +45,12 @@
       {{ partial "search/site-search" . }}
     </div>
   </div>
+
+{{ if not ($.Param "enableSidebarSingle") }}
 </main>
+{{ else }}
+</div>
 
-{{ if and (or ($.Param "enableToc") ($.Param "toc")) (ne ($.Param "tocPosition") "outer") (not ($.Param "enableSidebarSingle")) }}
-<aside class="single__side {{ if or ($.Param "enableToc") ($.Param "toc") }}main-side{{ end }}">
-  {{ partial "sidebar/sidebar-single" . }}
-</aside>
-{{ end }}
-
-{{ if $.Param "enableSidebarSingle" }}
 </div>
 <aside class="list__sidebar {{ if eq ($.Param "sidebarPosition") "left" }}l{{ else }}r{{ end }}" data-dir="{{ $.Param "languagedir" | default "ltr" }}">
     {{ partial "sidebar/sidebar-home" . }}
@@ -58,6 +58,13 @@
 </main>
 {{ partial "script/sidebar-script" . }}
 {{ end }}
+
+{{ if and (or ($.Param "enableToc") ($.Param "toc")) (ne ($.Param "tocPosition") "outer") (not ($.Param "enableSidebarSingle")) }}
+<aside class="single__side {{ if or ($.Param "enableToc") ($.Param "toc") }}main-side{{ end }}">
+  {{ partial "sidebar/sidebar-single" . }}
+</aside>
+{{ end }}
+
 
 <script>
   {{ $enableToc:= $.Param "enableToc" }}

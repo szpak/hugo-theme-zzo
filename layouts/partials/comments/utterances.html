@@ -1,3 +1,4 @@
+<hr class="hr-slash"/>
 <div id="utterances"></div>
 <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 <script>
@@ -7,7 +8,7 @@
       var owner = JSON.parse({{ $owner | jsonify }});
       {{ $repo:= .Site.Params.utterances.repo }}
       var repo = JSON.parse({{ $repo | jsonify }});
-      var localTheme = localStorage.getItem('theme');
+      var localTheme = localStorage.getItem('theme') == undefined ? 'dark' : localStorage.getItem('theme')
       var utterTheme = localTheme === "dark" || localTheme === "hacker" ? 'photon-dark' : localTheme === 'kimbie' ? 'github-dark-orange' : 'github-light'
 
       var myScript = document.createElement('script');

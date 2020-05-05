@@ -22,8 +22,7 @@
       myScript.onload = function() {
       }
 
-      var utterancesDiv = document.getElementById('utterances')
-      utterancesDiv.insertBefore(myScript, utterancesDiv.firstChild);
+      document.getElementById('utterances').appendChild(myScript);
     } catch (err) {
       console.log(err);
     }

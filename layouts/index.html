@@ -14,7 +14,7 @@
             {{ range $.Param "notAllowedTypesInHome" }}
                 {{ $filteredPages = (where $filteredPages "Type" "!=" (lower .)) }}
             {{ end }}
-            {{ $filteredPagesPinned := (where .Site.RegularPages "Type" "==" "not-existing-type-of-page") }}
+            {{ $filteredPagesPinned := slice }}
             {{ if .Site.Params.enablePinnedPosts }}
                 {{ $filteredPagesPinned = (where $filteredPages "Params.pinned" "==" true) }}
             {{ end }}
